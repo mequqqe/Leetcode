@@ -1,11 +1,12 @@
-﻿public class Solution
-{
-    public bool ContainsDuplicate(int[] nums)
-    {
-
-        //хэшсет это это математические операции,тут HashSet<int>(nums).Count
-        //хэшсет получает сколько уникальных цифр в массвие,а тут  общее количество элемеонтом в массие  nums.Length
-        //и они медлу собой сравнивается,если уникальный элемент меньше количестов элементов в массиве то озночает что есть повторяющиеся элементы
-        return new HashSet<int>(nums).Count < nums.Length;
-    }
-}
+﻿using System;namespace InsertionSortTemplate{    class Program    {        static void Main(string[] args)        {                        int[] arrayToSort = { 5, 2, 9, 1, 5, 6 };                        Console.WriteLine("Initial array: " + string.Join(", ", arrayToSort));                        InsertionSort(arrayToSort);                        Console.WriteLine("Sorted array: " + string.Join(", ", arrayToSort));        }        static void InsertionSort(int[] array)        {
+            for (int i = 1; i < array.Length; i++)
+            {
+                var key = array[i];
+                var j = i - 1;
+                while (j >= 0 && array[j] > key)
+                {
+                    array[j + 1] = array[j];
+                    j--;
+                }
+                array[j + 1] = key;
+            }        }    }}
