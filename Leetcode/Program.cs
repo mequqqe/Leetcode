@@ -1,36 +1,56 @@
-﻿public class Solution
+﻿using System;
+
+public class Solution
 {
-    public int BuyChoco(int[] prices, int money)
+    public bool StrongPasswordCheckerII(string password)
     {
-        //сортируется массив по алгоримту вставки
-        for (int i = 1; i < prices.Length; i++)
+        if (password.Length < 8)
         {
-            var key = prices[i];
-            var j = i - 1;
-            while (j >= 0 && prices[j] > key)
+            return false;
+        }
+
+        var isLower = false;
+        var isUpper = false;
+        var isDigit = false;
+        var isContains = false;
+
+        foreach (char str in password)
+        {
+            if (Char.IsLower(str))
             {
-                prices[j + 1] = prices[j];
-                j--;
+                isLower = true;
             }
-            prices[j + 1] = key;
+            if (Char.IsUpper(str))
+            {
+                isUpper = true;
+            }
+            if (Char.IsDigit(str))
+            {
+                isDigit = true;
+            }
+            if ("!@#$%^&*()-+".Contains(str))
+            {
+                isContains = true;
+            }
         }
 
-        //послпе сортировки нахолим минимальный и макс значение
-        int firstChoco = prices[0];
-        int lastChoco = prices[1];
-
-        int price = firstChoco + lastChoco;
-
-
-        //тут уже  проверяете, можно ли купить эти две шоколадки,если можно то вернет остаток,
-        //если нет то просто вернет деньги
-        if (price <= money)
+        int count = 1;
+        for (int i = 0; i < password.Length - 1; i++)
         {
-            return money - price;
+            if (password[i] == password[i + 1])
+            {
+                count++;
+                if (count == 2)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                count = 1;
+            }
         }
-        else
-        {
-            return money;
-        }
+
+        return (isLower && isDigit && isContains && isUpper);
     }
 }
