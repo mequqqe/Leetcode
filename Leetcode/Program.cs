@@ -15,10 +15,9 @@
             prices[j + 1] = key;
         }
 
-        //послпе сортировки нахолим минимальный и макс значение,
-        //если сортирован то можно просто получить первый и послдений массив
+        //послпе сортировки нахолим минимальный и макс значение
         int firstChoco = prices[0];
-        int lastChoco = prices[prices.Length - 1];
+        int lastChoco = prices[1];
 
         int price = firstChoco + lastChoco;
 
