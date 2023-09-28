@@ -31,6 +31,22 @@
         }
         else
         {
+            //FIX обновил метод так он не проходил еще один кейс,
+            //пробела в том что бы он покупал только минимальный и максимальный,а другие цены не проверял
+
+
+            // Дополнительная проверка для других пар шоколадок
+            for (int i = 0; i < prices.Length; i++)
+            {
+                for (int j = i + 1; j < prices.Length; j++)
+                {
+                    int currentPrice = prices[i] + prices[j];
+                    if (currentPrice <= money)
+                    {
+                        return money - currentPrice;
+                    }
+                }
+            }
             return money;
         }
     }
