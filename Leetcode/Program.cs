@@ -1,22 +1,54 @@
 ﻿public class Solution
 {
-    public int LengthOfLastWord(string s)
+    public string CategorizeBox(int length, int width, int height, int mass)
     {
-        if (s.Length == 0)
+
+        long volume = (long)length * (long)width * (long)height;
+
+        //int k = length * width * height; два кейса не проходит
+        //оказывается он большие цифры не принимает и для этого нужен лонг
+
+        int d = 10000;
+
+        int j = 1000000000;
+
+        bool isBulky = (length >= d || width >= d || height >= d || volume >= j);
+        bool isHeavy = (mass >= 100);
+
+        if (isBulky && isHeavy)
         {
-            return 0;
+            return "Both";
         }
-        string w = s.Trim();
-
-        string[] k = w.Split(' ');
-
-        if (k.Length == 0)
+        else if (isBulky)
         {
-            return 0;
+            return "Bulky";
+        }
+        else if (isHeavy)
+        {
+            return "Heavy";
+        }
+        else
+        {
+            return "Neither";
         }
 
-        string t = k[k.Length - 1];
+        //    if (length >= d || width >= d || height  >= d || mass >= d ||  k >= j) 
+        //    {
+        //        return "Bulky";
+        //    }
+        //    else
+        //    {
+        //        return "Heavy";
+        //    }
 
-        return t.Length;
+        //    if (mass >= 100) 
+        //    {
+        //        return "Bulky";
+        //    }
+        //    else
+        //    {
+        //        return "Heavy";
+        //    }
+        //}
     }
 }
