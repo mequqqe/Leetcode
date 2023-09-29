@@ -1,22 +1,18 @@
 ﻿public class Solution
 {
-    public int LengthOfLastWord(string s)
+    public bool IsPrefixString(string s, string[] words)
     {
-        if (s.Length == 0)
+        string result = string.Empty;
+
+        foreach (string word in words)
         {
-            return 0;
+            result += word;
+            if (result == s)
+            {
+                return true;
+            }
         }
-        string w = s.Trim();
+        return false;
 
-        string[] k = w.Split(' ');
-
-        if (k.Length == 0)
-        {
-            return 0;
-        }
-
-        string t = k[k.Length - 1];
-
-        return t.Length;
     }
 }
