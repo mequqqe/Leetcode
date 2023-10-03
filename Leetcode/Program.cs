@@ -1,43 +1,43 @@
-﻿public class Solution
+﻿using System;
+using System.Diagnostics;
+using System.Xml.Linq;
+
+public class Solution
 {
-    public int CountWords(string[] words1, string[] words2)
+    //public string DiscountPrices(string sentence, int discount)
+    //{
+    //    string[] arr = sentence.Split(' ');
+    //    string searchElement = "$";
+    //    bool containsNumber = false;
+    //    foreach (string str in arr)
+    //    {
+    //        if (str == searchElement || sentence is int)
+    //        {
+    //            containsNumber = true;
+
+    //            break;  
+    //        }
+    //    }
+    //}
+
+    public string DiscountPrices(string sentence, int discount)
     {
-        //var merge = words1.Intersect(words2);
-
-        //foreach (var word in words1)
-        //{
-        //    if (dict1.ContainsKey(word))
-        //    {
-        //        dict1[word]++;
-        //    }
-        //    else
-        //    {
-        //        dict1[word] = 1;
-        //    }
-        //}
-
-        //foreach (var word in words2)
-        //{
-        //    if (dict2.ContainsKey(word))
-        //    {
-        //        dict2[word]++;
-        //    }
-        //    else
-        //    {
-        //        dict2[word] = 1;
-        //    }
-        //}
-
-
-        int count = 0;
-
-        var t = words1.GroupBy(x => x).Where(g => g.Count() == 1).Select(g => g.Key);
-        var k = words2.GroupBy(x => x).Where(g => g.Count() == 1).Select(g => g.Key);
-
-        var merge = t.Intersect(k);
-
-        count = merge.Count();
-
-        return count;
+        string[] arr = sentence.Split(' ');
+        string searchElement = "$";
+        for (int i = 0; i < arr.Length; i++)
+        {
+            string word = arr[i];
+            if (word.StartsWith("$"))
+            {
+                string numberPart = word.Substring(1);
+                //if (double.TryParse(numberPart, out double price)) не проходит последнюю проверку и за точек и нолей 
+                if (numberPart.All(c => char.IsDigit(c) || c == '.') && double.TryParse(numberPart, out double price))
+                {
+                    double discountPrice = price * (100 - discount) / 100;
+                    arr[i] = $"${discountPrice:F2}";
+                }
+            }
+        }
+        return string.Join(" ", arr);
     }
 }
