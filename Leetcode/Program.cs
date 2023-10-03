@@ -1,38 +1,43 @@
-﻿using System.Text;
-public class Solution
+﻿public class Solution
 {
-    public int MaximumCount(int[] nums)
+    public int CountWords(string[] words1, string[] words2)
     {
-        //Array.Sort(nums);
-        //foreach (int number in nums)
+        //var merge = words1.Intersect(words2);
+
+        //foreach (var word in words1)
         //{
-        //    if (number < 0)
+        //    if (dict1.ContainsKey(word))
         //    {
-        //        return "neg";
+        //        dict1[word]++;
         //    }
-        //    else if (number > 0)
+        //    else
         //    {
-        //        return "pos";
+        //        dict1[word] = 1;
         //    }
         //}
-        //return "none";
+
+        //foreach (var word in words2)
+        //{
+        //    if (dict2.ContainsKey(word))
+        //    {
+        //        dict2[word]++;
+        //    }
+        //    else
+        //    {
+        //        dict2[word] = 1;
+        //    }
+        //}
 
 
-        int pos = 0; 
-        int neg= 0; 
+        int count = 0;
 
-        foreach (int number in nums)
-        {
-            if (number > 0)
-            {
-                pos++;
-            }
-            else if (number < 0)
-            {
-                neg++;
-            }
-        }
+        var t = words1.GroupBy(x => x).Where(g => g.Count() == 1).Select(g => g.Key);
+        var k = words2.GroupBy(x => x).Where(g => g.Count() == 1).Select(g => g.Key);
 
-        return Math.Max(pos,neg);
+        var merge = t.Intersect(k);
+
+        count = merge.Count();
+
+        return count;
     }
 }
