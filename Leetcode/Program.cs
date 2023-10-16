@@ -1,28 +1,22 @@
-﻿using System.Collections.Generic;
-
-public class Solution
+﻿public class Solution
 {
-    public int MajorityElement(int[] nums)
+    public bool IsAnagram(string s, string t)
     {
-        var dict = new Dictionary<int, int>();
-
-        foreach (var num in nums)
+        if (s.Length != t.Length)
         {
-            if (dict.ContainsKey(num))
-            {
-                dict[num]++;
-            }
-            else
-            {
-                dict[num] = 1;
-            }
-
-            if (dict[num] > nums.Length / 2)
-            {
-                return num;
-            }
+            return false; 
         }
 
-        return 0; 
+        
+        char[] sArray = s.ToCharArray();
+        char[] tArray = t.ToCharArray();
+
+        
+        Array.Sort(sArray);
+        Array.Sort(tArray);
+
+       
+        return new string(sArray) == new string(tArray);
     }
 }
+   
