@@ -1,22 +1,34 @@
-﻿public class Solution
+﻿using System;
+public class Solution
 {
-    public bool IsAnagram(string s, string t)
+    public string[] FindRelativeRanks(int[] score)
     {
-        if (s.Length != t.Length)
+        string[] res = new string[score.Length];
+
+        int[] sorted= (int[])score.Clone();
+
+        Array.Sort(sorted,(x, y) => y.CompareTo(x));
+
+        string[] ranks = new string[score.Length];
+
+        for (int i = 0; i < score.Length; i++)
         {
-            return false; 
+            int rank = Array.IndexOf(sorted, score[i]) + 1;
+            string rankStr;
+
+            if (rank == 1)
+                rankStr = "Gold Medal";
+            else if (rank == 2)
+                rankStr = "Silver Medal";
+            else if (rank == 3)
+                rankStr = "Bronze Medal";
+            else
+                rankStr = rank.ToString();
+
+            ranks[i] = rankStr;
         }
 
-        
-        char[] sArray = s.ToCharArray();
-        char[] tArray = t.ToCharArray();
-
-        
-        Array.Sort(sArray);
-        Array.Sort(tArray);
-
-       
-        return new string(sArray) == new string(tArray);
+        return ranks;
     }
 }
-   
+
